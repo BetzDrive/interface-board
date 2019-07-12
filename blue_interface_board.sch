@@ -1,5 +1,5 @@
 EESchema Schematic File Version 5
-LIBS:blue_inputboard-cache
+LIBS:blue_interface_board-cache
 EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268

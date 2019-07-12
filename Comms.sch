@@ -1,5 +1,5 @@
 EESchema Schematic File Version 5
-LIBS:blue_inputboard-cache
+LIBS:blue_interface_board-cache
 EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
@@ -273,17 +273,6 @@ Wire Wire Line
 	8250 1350 8450 1350
 Wire Wire Line
 	8050 1150 8250 1150
-$Comp
-L power:GNDD #PWR0107
-U 1 1 5D293F1C
-P 9050 1400
-F 0 "#PWR0107" H 9050 1150 50  0001 C CNN
-F 1 "GNDD" H 9054 1245 50  0000 C CNN
-F 2 "" H 9050 1400 50  0001 C CNN
-F 3 "" H 9050 1400 50  0001 C CNN
-	1    9050 1400
-	1    0    0    -1  
-$EndComp
 Connection ~ 6650 1150
 Text Label 9450 5600 0    50   ~ 0
 DN
@@ -311,17 +300,6 @@ Wire Wire Line
 	9050 1400 9050 1350
 Text Label 1700 6750 0    50   ~ 0
 RS485_B
-$Comp
-L power:GNDD #PWR0108
-U 1 1 5D293F19
-P 8250 1400
-F 0 "#PWR0108" H 8250 1150 50  0001 C CNN
-F 1 "GNDD" H 8254 1245 50  0000 C CNN
-F 2 "" H 8250 1400 50  0001 C CNN
-F 3 "" H 8250 1400 50  0001 C CNN
-	1    8250 1400
-	1    0    0    -1  
-$EndComp
 Connection ~ 6650 1350
 $Comp
 L power:GNDD #PWR0109
@@ -1187,7 +1165,7 @@ F 3 "~" H 2150 4000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2350 3900 3500 3900
+	2350 3900 2850 3900
 Wire Wire Line
 	2150 3900 2150 3800
 Wire Wire Line
@@ -1441,4 +1419,32 @@ Wire Wire Line
 	1800 7250 2000 7250
 Wire Wire Line
 	2000 7250 2000 7050
+Connection ~ 3000 2800
+Connection ~ 3000 1800
+Connection ~ 2850 3900
+Wire Wire Line
+	2850 3900 3500 3900
+Connection ~ 2850 4100
+$Comp
+L power:GNDPWR #PWR?
+U 1 1 5D33261B
+P 8250 1400
+F 0 "#PWR?" H 8250 1150 50  0001 C CNN
+F 1 "GNDPWR" H 8255 1227 50  0000 C CNN
+F 2 "" H 8250 1400 50  0001 C CNN
+F 3 "" H 8250 1400 50  0001 C CNN
+	1    8250 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GNDPWR #PWR?
+U 1 1 5D332AC0
+P 9050 1400
+F 0 "#PWR?" H 9050 1150 50  0001 C CNN
+F 1 "GNDPWR" H 9055 1227 50  0000 C CNN
+F 2 "" H 9050 1400 50  0001 C CNN
+F 3 "" H 9050 1400 50  0001 C CNN
+	1    9050 1400
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

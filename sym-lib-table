@@ -4,4 +4,5 @@
   (lib (name "Interface_USB")(type "Legacy")(uri "/usr/share/kicad-nightly/library/Interface_USB.lib")(options "")(descr ""))
   (lib (name "Memory_EEPROM")(type "Legacy")(uri "/usr/share/kicad-nightly/library/Memory_EEPROM.lib")(options "")(descr ""))
   (lib (name "Interface_UART")(type "Legacy")(uri "/usr/share/kicad-nightly/library/Interface_UART.lib")(options "")(descr ""))
+  (lib (name "Comparator")(type "Legacy")(uri "/usr/share/kicad-nightly/library/Comparator.lib")(options "")(descr ""))
 )
