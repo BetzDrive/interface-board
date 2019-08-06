@@ -1,4 +1,4 @@
-update=Fri 12 Jul 2019 08:01:14 PM +08
+update=Tue Aug  6 14:37:26 2019
 last_client=kicad
 [general]
 version=1
@@ -6,7 +6,12 @@ version=1
 version=1
 PageLayoutDescrFile=
 LastNetListRead=
-CopperLayerCount=2
+LastSTEPExportPath=
+LastIDFExportPath=
+LastVRMLExportPath=
+LastSpecctraDSNExportPath=
+LastGenCADExportPath=
+CopperLayerCount=4
 BoardThickness=1.6
 AllowMicroVias=0
 AllowBlindVias=0
@@ -62,12 +67,12 @@ Type=0
 Enabled=1
 [pcbnew/Layer.In1.Cu]
 Name=In1.Cu
-Type=0
-Enabled=0
+Type=1
+Enabled=1
 [pcbnew/Layer.In2.Cu]
 Name=In2.Cu
-Type=0
-Enabled=0
+Type=1
+Enabled=1
 [pcbnew/Layer.In3.Cu]
 Name=In3.Cu
 Type=0
@@ -225,7 +230,7 @@ Enabled=0
 [pcbnew/Netclasses]
 [pcbnew/Netclasses/Default]
 Name=Default
-Clearance=0.2032
+Clearance=0.1524
 TrackWidth=0.3048
 ViaDiameter=0.762
 ViaDrill=0.381

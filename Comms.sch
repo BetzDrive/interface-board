@@ -1,6 +1,6 @@
 EESchema Schematic File Version 5
 LIBS:blue_interface_board-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -139,8 +139,6 @@ F 3 "~" H 7650 1250 50  0001 C CNN
 	1    7650 1250
 	1    0    0    -1  
 $EndComp
-Text Notes 800  6450 0    50   ~ 0
-TODO check if pin order on connector is mirrored
 Text Notes 8750 850  0    50   ~ 0
 ADM Pins 9-10
 Wire Wire Line
@@ -1447,4 +1445,38 @@ F 3 "" H 9050 1400 50  0001 C CNN
 	1    9050 1400
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	3900 6650 3550 6650
+Text Label 3550 6650 0    50   ~ 0
+RS485_A
+Wire Wire Line
+	3550 6750 3900 6750
+$Comp
+L Connector_Generic:Conn_01x03 J6
+U 1 1 5D4BE1BB
+P 4100 6750
+F 0 "J6" H 4018 6425 50  0000 C CNN
+F 1 "Conn_01x03" H 4018 6516 50  0000 C CNN
+F 2 "Connector_Molex:Molex_Nano-Fit_105313-xx03_1x03_P2.50mm_Horizontal" H 4100 6750 50  0001 C CNN
+F 3 "~" H 4100 6750 50  0001 C CNN
+	1    4100 6750
+	1    0    0    -1  
+$EndComp
+Text Label 3550 6750 0    50   ~ 0
+RS485_B
+$Comp
+L power:GNDPWR #PWR0157
+U 1 1 5D4DFA36
+P 3700 6900
+F 0 "#PWR0157" H 3700 6650 50  0001 C CNN
+F 1 "GNDPWR" H 3705 6727 50  0000 C CNN
+F 2 "" H 3700 6900 50  0001 C CNN
+F 3 "" H 3700 6900 50  0001 C CNN
+	1    3700 6900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3900 6850 3700 6850
+Wire Wire Line
+	3700 6850 3700 6900
 $EndSCHEMATC
