@@ -13,6 +13,11 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
 $EndDescr
 Wire Wire Line
 	7450 1350 7650 1350
@@ -21,12 +26,9 @@ RS485_A
 Wire Wire Line
 	6650 1150 6850 1150
 Wire Wire Line
-	2000 7050 2050 7050
-Wire Wire Line
 	1700 6750 2050 6750
 Wire Wire Line
 	2050 6850 1700 6850
-NoConn ~ 2050 6650
 Wire Wire Line
 	6650 1350 6450 1350
 Wire Wire Line
@@ -69,8 +71,6 @@ F 3 "~" H 9250 1250 50  0001 C CNN
 	1    9250 1250
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2050 6950 1700 6950
 Wire Wire Line
 	7450 1150 7450 1100
 Text Label 8250 950  3    50   ~ 0
@@ -171,17 +171,6 @@ F 3 "~" H 8450 1250 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	9350 5300 9350 4900
-$Comp
-L Connector_Generic:Conn_01x05 J1
-U 1 1 5D293F26
-P 2250 6850
-F 0 "J1" H 2330 6892 50  0000 L CNN
-F 1 "Conn_01x05" H 2330 6801 50  0000 L CNN
-F 2 "Connector_Molex:Molex_Micro-Fit_3.0_43650-0500_1x05_P3.00mm_Horizontal" H 2250 6850 50  0001 C CNN
-F 3 "~" H 2250 6850 50  0001 C CNN
-	1    2250 6850
-	1    0    0    -1  
-$EndComp
 $Comp
 L Device:C_Small C22
 U 1 1 5D293F1A
@@ -288,8 +277,6 @@ Wire Wire Line
 	9600 5650 9600 5600
 Wire Wire Line
 	8850 1150 9050 1150
-Wire Wire Line
-	9050 5900 8950 5900
 Wire Wire Line
 	9500 5000 9500 4900
 Connection ~ 8250 1150
@@ -1411,12 +1398,8 @@ F 3 "~" H 9200 5450 50  0001 C CNN
 	1    9050 5500
 	1    0    0    -1  
 $EndComp
-Text GLabel 1800 7250 0    50   Input ~ 0
+Text GLabel 2050 7050 0    50   Input ~ 0
 VOUT
-Wire Wire Line
-	1800 7250 2000 7250
-Wire Wire Line
-	2000 7250 2000 7050
 Connection ~ 3000 2800
 Connection ~ 3000 1800
 Connection ~ 2850 3900
@@ -1457,7 +1440,7 @@ U 1 1 5D4BE1BB
 P 4100 6750
 F 0 "J6" H 4018 6425 50  0000 C CNN
 F 1 "Conn_01x03" H 4018 6516 50  0000 C CNN
-F 2 "Connector_Molex:Molex_Nano-Fit_105313-xx03_1x03_P2.50mm_Horizontal" H 4100 6750 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 4100 6750 50  0001 C CNN
 F 3 "~" H 4100 6750 50  0001 C CNN
 	1    4100 6750
 	1    0    0    -1  
@@ -1479,4 +1462,19 @@ Wire Wire Line
 	3900 6850 3700 6850
 Wire Wire Line
 	3700 6850 3700 6900
+$Comp
+L Connector_Generic:Conn_01x05 J1
+U 1 1 5D293F26
+P 2250 6850
+F 0 "J1" H 2330 6892 50  0000 L CNN
+F 1 "Conn_01x05" H 2330 6801 50  0000 L CNN
+F 2 "BLDC:molex-436500511" H 2250 6850 50  0001 C CNN
+F 3 "~" H 2250 6850 50  0001 C CNN
+	1    2250 6850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2050 6950 1700 6950
+Wire Wire Line
+	9050 5900 8950 5900
 $EndSCHEMATC
