@@ -1441,8 +1441,6 @@ Wire Wire Line
 	9650 4000 9950 4000
 Wire Wire Line
 	10695 4600 10700 4600
-Wire Wire Line
-	8270 2100 8275 2100
 Connection ~ 9950 4000
 Connection ~ 10250 4600
 Connection ~ 9800 4600
