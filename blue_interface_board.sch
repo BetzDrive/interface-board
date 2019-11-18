@@ -1,5 +1,4 @@
 EESchema Schematic File Version 5
-LIBS:blue_interface_board-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -13,6 +12,11 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
 $EndDescr
 $Sheet
 S 1300 2700 700  200 
@@ -71,10 +75,10 @@ F 3 "~" H 2950 4250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GNDPWR #PWR?
+L power:GNDPWR #PWR0146
 U 1 1 5D51731A
 P 750 4350
-F 0 "#PWR?" H 750 4100 50  0001 C CNN
+F 0 "#PWR0146" H 750 4100 50  0001 C CNN
 F 1 "GNDPWR" H 755 4177 50  0000 C CNN
 F 2 "" H 750 4350 50  0001 C CNN
 F 3 "" H 750 4350 50  0001 C CNN
@@ -82,10 +86,10 @@ F 3 "" H 750 4350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GNDPWR #PWR?
+L power:GNDPWR #PWR0149
 U 1 1 5D517AC5
 P 1500 4350
-F 0 "#PWR?" H 1500 4100 50  0001 C CNN
+F 0 "#PWR0149" H 1500 4100 50  0001 C CNN
 F 1 "GNDPWR" H 1505 4177 50  0000 C CNN
 F 2 "" H 1500 4350 50  0001 C CNN
 F 3 "" H 1500 4350 50  0001 C CNN
@@ -93,25 +97,15 @@ F 3 "" H 1500 4350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GNDPWR #PWR?
-U 1 1 5D517D46
-P 2250 4350
-F 0 "#PWR?" H 2250 4100 50  0001 C CNN
-F 1 "GNDPWR" H 2255 4177 50  0000 C CNN
-F 2 "" H 2250 4350 50  0001 C CNN
-F 3 "" H 2250 4350 50  0001 C CNN
-	1    2250 4350
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GNDPWR #PWR?
+L power:GNDPWR #PWR0155
 U 1 1 5D518361
 P 2950 4350
-F 0 "#PWR?" H 2950 4100 50  0001 C CNN
+F 0 "#PWR0155" H 2950 4100 50  0001 C CNN
 F 1 "GNDPWR" H 2955 4177 50  0000 C CNN
 F 2 "" H 2950 4350 50  0001 C CNN
 F 3 "" H 2950 4350 50  0001 C CNN
 	1    2950 4350
 	1    0    0    -1  
 $EndComp
+NoConn ~ 2250 4350
 $EndSCHEMATC

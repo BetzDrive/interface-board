@@ -1,5 +1,4 @@
 EESchema Schematic File Version 5
-LIBS:blue_interface_board-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -1430,8 +1429,6 @@ F 3 "" H 9050 1400 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	3900 6650 3550 6650
-Text Label 3550 6650 0    50   ~ 0
-RS485_A
 Wire Wire Line
 	3550 6750 3900 6750
 $Comp
@@ -1443,19 +1440,6 @@ F 1 "Conn_01x03" H 4018 6516 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 4100 6750 50  0001 C CNN
 F 3 "~" H 4100 6750 50  0001 C CNN
 	1    4100 6750
-	1    0    0    -1  
-$EndComp
-Text Label 3550 6750 0    50   ~ 0
-RS485_B
-$Comp
-L power:GNDPWR #PWR0157
-U 1 1 5D4DFA36
-P 3700 6900
-F 0 "#PWR0157" H 3700 6650 50  0001 C CNN
-F 1 "GNDPWR" H 3705 6727 50  0000 C CNN
-F 2 "" H 3700 6900 50  0001 C CNN
-F 3 "" H 3700 6900 50  0001 C CNN
-	1    3700 6900
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -1477,4 +1461,19 @@ Wire Wire Line
 	2050 6950 1700 6950
 Wire Wire Line
 	9050 5900 8950 5900
+Text Label 3550 6650 0    50   ~ 0
+RS485_TX
+Text Label 3550 6750 0    50   ~ 0
+RS485_RX
+$Comp
+L power:GNDD #PWR0157
+U 1 1 5DD2A0BF
+P 3700 6900
+F 0 "#PWR0157" H 3700 6650 50  0001 C CNN
+F 1 "GNDD" H 3704 6745 50  0000 C CNN
+F 2 "" H 3700 6900 50  0001 C CNN
+F 3 "" H 3700 6900 50  0001 C CNN
+	1    3700 6900
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
