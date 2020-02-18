@@ -7,6 +7,6 @@
   (lib (name "Comparator")(type "Legacy")(uri "/usr/share/kicad-nightly/library/Comparator.lib")(options "")(descr ""))
   (lib (name "MCU_ST_STM32L0")(type "Legacy")(uri "/usr/share/kicad-nightly/library/MCU_ST_STM32L0.lib")(options "")(descr ""))
   (lib (name "DCDC_Converters")(type "Legacy")(uri "${KIWORKSPACE}/osrf_hw/kicad_libraries/DCDC_Converters.lib")(options "")(descr ""))
-  (lib (name "BLDC")(type "Legacy")(uri "/home/luca/hw/bldc-controller-hardware/library/BLDC.lib")(options "")(descr ""))
+  (lib (name "BLDC")(type "Legacy")(uri "${KIWORKSPACE}/bldc-controller-hardware/library/BLDC.lib")(options "")(descr ""))
   (lib (name "Mechanical")(type "Legacy")(uri "/usr/share/kicad-nightly/library/Mechanical.lib")(options "")(descr ""))
 )
