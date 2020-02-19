@@ -21,9 +21,9 @@ $EndDescr
 NoConn ~ 2900 5800
 Text Notes 2650 5450 2    118  ~ 24
 Mounting holes
-Text Notes 3800 1800 2    118  ~ 24
+Text Notes 4000 2800 2    118  ~ 24
 Power handling subsystems
-Text Notes 4000 3600 2    118  ~ 24
+Text Notes 8250 2800 2    118  ~ 24
 RS-485 and USB subsystems
 $Comp
 L Mechanical:MountingHole_Pad H1
@@ -70,13 +70,13 @@ F 3 "~" H 3600 5700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Sheet
-S 1300 3850 700  200 
+S 5450 2100 3050 1350
 U 5D27A619
 F0 "Comms" 118
 F1 "Comms.sch" 118
 $EndSheet
 $Sheet
-S 1300 2100 700  200 
+S 1300 2100 3150 1350
 U 5D2C77D8
 F0 "Power" 118
 F1 "Power.sch" 118
