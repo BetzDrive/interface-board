@@ -55,6 +55,7 @@ Connection ~ 5150 1700
 Connection ~ 5150 3200
 Connection ~ 5150 3500
 Connection ~ 5200 3900
+Connection ~ 5200 4200
 Connection ~ 5450 1700
 Connection ~ 5450 2050
 Connection ~ 5550 3500
@@ -337,6 +338,8 @@ Wire Wire Line
 Wire Wire Line
 	5200 4200 4850 4200
 Wire Wire Line
+	5200 4200 5550 4200
+Wire Wire Line
 	5250 3900 5200 3900
 Wire Wire Line
 	5300 6000 5500 6000
@@ -350,6 +353,8 @@ Wire Wire Line
 	5550 3500 5550 3450
 Wire Wire Line
 	5550 3700 5200 3700
+Wire Wire Line
+	5550 4100 5550 4200
 Wire Wire Line
 	5650 6200 5300 6200
 Wire Wire Line
@@ -555,22 +560,18 @@ VIN divider 2.17V @48V\nTrigger when VOUT > 50.2V\n(Without tolerances)
 Text Notes 3950 5650 2    50   ~ 0
 COMP1 on PA0/PA1\nCOMP2 on PA3/PA2
 Text Notes 4970 4440 0    50   ~ 0
-46.8V threshold Power Good
+18.9 V threshold Power Good
 Text Notes 5400 1600 0    50   ~ 0
 Schottky diode to eat\nkickback energy at power-off
 Text Notes 5400 5450 2    79   ~ 16
 ARM Cortex-M JTAG
 Text Notes 5650 3700 2    50   ~ 0
 I2C addr: ZZZ = 0x40
-Text Notes 5700 3800 0    50   ~ 0
-TODO: check pinout
 Text Notes 6700 3000 0    50   ~ 0
 dV/dt startup
-Text Notes 6700 4450 0    50   ~ 0
-TODO: check transistor pinout
 Text Notes 7200 6100 0    50   ~ 0
 TODO: check FET pinouts
-Text Notes 8500 4550 2    50   ~ 0
+Text Notes 8300 4450 2    50   ~ 0
 20 uA / C27 = 0.133 V / ms ramp rate
 Text Notes 9150 6150 0    50   ~ 0
 Power good LED
@@ -835,17 +836,6 @@ F 1 "GND" H 5455 1877 50  0001 C CNN
 F 2 "" H 5450 2050 50  0001 C CNN
 F 3 "" H 5450 2050 50  0001 C CNN
 	1    5450 2050
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0141
-U 1 1 5E50DF19
-P 5550 4100
-F 0 "#PWR0141" H 5550 3850 50  0001 C CNN
-F 1 "GND" H 5555 3927 50  0001 C CNN
-F 2 "" H 5550 4100 50  0001 C CNN
-F 3 "" H 5550 4100 50  0001 C CNN
-	1    5550 4100
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -1588,6 +1578,10 @@ F 0 "D3" H 7000 3084 50  0000 C CNN
 F 1 "1N4148W-7-F" H 7000 3175 50  0000 C CNN
 F 2 "Diode_SMD:D_SOD-123" H 7000 3300 50  0001 C CNN
 F 3 "~" H 7000 3300 50  0001 C CNN
+F 4 "Digikey" H 7000 3300 50  0001 C CNN "D1N"
+F 5 "1N4148W-FDICT-ND" H 7000 3300 50  0001 C CNN "D1PN"
+F 6 "Diodes Inc" H 7000 3300 50  0001 C CNN "MFN"
+F 7 "1N4148W-7-F" H 7000 3300 50  0001 C CNN "MPN"
 	1    7000 3300
 	-1   0    0    1   
 $EndComp
@@ -1651,13 +1645,17 @@ F 3 "~" H 1350 1800 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Device:Q_NPN_BCE Q3
+L Device:Q_NPN_BEC Q3
 U 1 1 5D2C7C9A
 P 5450 3900
 F 0 "Q3" H 5641 3946 50  0000 L CNN
 F 1 "MMBT3904" H 5641 3855 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 5650 4000 50  0001 C CNN
 F 3 "~" H 5450 3900 50  0001 C CNN
+F 4 "Digikey" H 5450 3900 50  0001 C CNN "D1N"
+F 5 "MMBT3904-FDICT-ND" H 5450 3900 50  0001 C CNN "D1PN"
+F 6 "Diodes Inc" H 5450 3900 50  0001 C CNN "MFN"
+F 7 "MMBT3904-7-F" H 5450 3900 50  0001 C CNN "MPN"
 	1    5450 3900
 	1    0    0    -1  
 $EndComp
@@ -1669,6 +1667,10 @@ F 0 "Q1" H 7241 3946 50  0000 L CNN
 F 1 "MMBT5401LT1G" H 7241 3855 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 7250 4000 50  0001 C CNN
 F 3 "~" H 7050 3900 50  0001 C CNN
+F 4 "Digikey" H 7050 3900 50  0001 C CNN "D1N"
+F 5 "MMBT5401LT1GOSCT-ND" H 7050 3900 50  0001 C CNN "D1PN"
+F 6 "ON Semi" H 7050 3900 50  0001 C CNN "MFN"
+F 7 "MMBT5401LT1G" H 7050 3900 50  0001 C CNN "MPN"
 	1    7050 3900
 	1    0    0    1   
 $EndComp
