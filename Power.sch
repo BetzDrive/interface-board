@@ -111,6 +111,8 @@ Wire Wire Line
 Wire Wire Line
 	900  5150 1250 5150
 Wire Wire Line
+	1100 5500 1550 5500
+Wire Wire Line
 	1100 6600 1100 7200
 Wire Wire Line
 	1100 7200 1950 7200
@@ -124,8 +126,6 @@ Wire Wire Line
 	1350 2900 1350 3050
 Wire Wire Line
 	1350 3150 1550 3150
-Wire Wire Line
-	1350 5500 1550 5500
 Wire Wire Line
 	1550 1100 1850 1100
 Wire Wire Line
@@ -351,7 +351,7 @@ Wire Wire Line
 Wire Wire Line
 	5250 3300 5200 3300
 Wire Wire Line
-	5300 6000 5500 6000
+	5300 6000 5650 6000
 Wire Wire Line
 	5450 1100 6100 1100
 Wire Wire Line
@@ -576,6 +576,8 @@ Text Notes 2050 3800 0    50   ~ 0
 52.5 V - 55.4 V overvoltage lockout hysteresis
 Text Notes 2050 3910 0    50   ~ 0
 16.1 V - 18.9 V nominal undervoltage lockout hysteresis
+Text Notes 2350 4900 0    50   ~ 0
+TODO: debugging UART pin for STDOUT
 Text Notes 2900 700  0    50   ~ 0
 With a 15 mOhm shunt,\ncurrent limit trips at 3.33 amps (nominal)
 Text Notes 2950 7450 0    50   ~ 0
@@ -590,8 +592,10 @@ Text Notes 5400 5450 2    79   ~ 16
 ARM Cortex-M JTAG
 Text Notes 5650 3100 2    50   ~ 0
 I2C addr: ZZZ = 0x40
+Text Notes 6450 2300 2    50   ~ 0
+TODO: verify Rpwr isn't too low
 Text Notes 6600 3000 0    50   ~ 0
-dV/dt startup
+dV/dt startup method for LM5066
 Text Notes 6850 1800 2    50   ~ 0
 SS floating = 4ms rise time
 Text Notes 6850 2200 2    50   ~ 0
@@ -602,6 +606,8 @@ Text Notes 7200 6250 0    50   ~ 0
 TODO: gate resistor?
 Text Notes 8200 4450 2    50   ~ 0
 20 uA / C27 = 0.133 V / ms ramp rate
+Text Notes 9000 4400 0    50   ~ 0
+soft-start ramp time = 2.3ms
 Text Notes 9150 6150 0    50   ~ 0
 Power good LED
 Text Notes 9550 5700 2    50   ~ 0
@@ -638,7 +644,7 @@ Text Label 4800 2100 0    50   ~ 0
 PGD
 Text Label 5050 2500 2    50   ~ 0
 LM_VDD
-Text Label 5500 6000 2    50   ~ 0
+Text Label 5650 6000 2    50   ~ 0
 nRST
 Text Label 5650 6200 2    50   ~ 0
 SWDCLK
@@ -754,6 +760,17 @@ F 2 "" H 10200 3550 50  0001 C CNN
 F 3 "" H 10200 3550 50  0001 C CNN
 	1    10200 3550
 	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0138
+U 1 1 5E53895F
+P 1100 5700
+F 0 "#PWR0138" H 1100 5450 50  0001 C CNN
+F 1 "GND" H 1105 5527 50  0001 C CNN
+F 2 "" H 1100 5700 50  0001 C CNN
+F 3 "" H 1100 5700 50  0001 C CNN
+	1    1100 5700
+	-1   0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0137
@@ -1250,16 +1267,16 @@ $Comp
 L Device:R_Small R30
 U 1 1 5D6A675C
 P 10200 3700
-F 0 "R30" H 10275 3750 39  0000 L CNN
-F 1 "562k" H 10275 3700 39  0000 L CNN
+F 0 "R30" H 10300 3750 50  0000 L CNN
+F 1 "437k" H 10300 3650 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" H 10200 3700 60  0001 C CNN
 F 3 "~" H 10200 3700 60  0001 C CNN
 F 4 "Digikey" H 10250 3800 50  0001 C CNN "D1N"
-F 5 "YAG3212CT-ND " H 10250 3800 50  0001 C CNN "D1PN"
-F 6 "Yageo" H 10250 3800 50  0001 C CNN "MFN"
-F 7 "RC0402FR-07681KL" H 10250 3800 50  0001 C CNN "MPN"
-F 8 "0.0625W" H 10200 3700 60  0001 C CNN "Maximum Power"
-F 9 "681000.0ohm" H 10200 3700 60  0001 C CNN "Resistance"
+F 5 "P432KHCT-ND" H 10250 3800 50  0001 C CNN "D1PN"
+F 6 "Panasonic" H 10250 3800 50  0001 C CNN "MFN"
+F 7 "ERJ-3EKF4323V" H 10250 3800 50  0001 C CNN "MPN"
+F 8 "" H 10200 3700 60  0001 C CNN "Maximum Power"
+F 9 "432000" H 10200 3700 60  0001 C CNN "Resistance"
 F 10 "1%" H 10200 3700 60  0001 C CNN "Tolerance"
 	1    10200 3700
 	1    0    0    -1  
@@ -1268,16 +1285,16 @@ $Comp
 L Device:R_Small R31
 U 1 1 5D6A675D
 P 10200 4000
-F 0 "R31" H 10275 4050 39  0000 L CNN
-F 1 "180k" H 10275 4000 39  0000 L CNN
+F 0 "R31" H 10300 4050 50  0000 L CNN
+F 1 "140k" H 10300 3950 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" H 10200 4000 60  0001 C CNN
 F 3 "~" H 10200 4000 60  0001 C CNN
 F 4 "Digikey" H 10250 4100 50  0001 C CNN "D1N"
-F 5 "311-180KLRCT-ND " H 10250 4100 50  0001 C CNN "D1PN"
-F 6 "Yageo" H 10250 4100 50  0001 C CNN "MFN"
-F 7 "RC0402FR-07180KL" H 10250 4100 50  0001 C CNN "MPN"
-F 8 "0.0625W" H 10200 4000 60  0001 C CNN "Maximum Power"
-F 9 "180000.0ohm" H 10200 4000 60  0001 C CNN "Resistance"
+F 5 "" H 10250 4100 50  0001 C CNN "D1PN"
+F 6 "" H 10250 4100 50  0001 C CNN "MFN"
+F 7 "" H 10250 4100 50  0001 C CNN "MPN"
+F 8 "" H 10200 4000 60  0001 C CNN "Maximum Power"
+F 9 "" H 10200 4000 60  0001 C CNN "Resistance"
 F 10 "1%" H 10200 4000 60  0001 C CNN "Tolerance"
 	1    10200 4000
 	1    0    0    -1  
@@ -1306,6 +1323,17 @@ F 1 "100n" H 992 4955 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 900 5000 50  0001 C CNN
 F 3 "~" H 900 5000 50  0001 C CNN
 	1    900  5000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C48
+U 1 1 5E5381D4
+P 1100 5600
+F 0 "C48" H 1192 5646 50  0000 L CNN
+F 1 "100n" H 1192 5555 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 1100 5600 50  0001 C CNN
+F 3 "~" H 1100 5600 50  0001 C CNN
+	1    1100 5600
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1467,7 +1495,7 @@ L Device:C_Small C46
 U 1 1 5DDAD6B3
 P 8650 2100
 F 0 "C46" H 8742 2146 50  0000 L CNN
-F 1 "47p" H 8742 2055 50  0000 L CNN
+F 1 "82p" H 8742 2055 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 8650 2100 50  0001 C CNN
 F 3 "~" H 8650 2100 50  0001 C CNN
 	1    8650 2100
@@ -1477,8 +1505,8 @@ $Comp
 L Device:C_Small C43
 U 1 1 5D6A675A
 P 9000 3650
-F 0 "C43" H 9100 3600 28  0000 L CNN
-F 1 "22u" H 9100 3650 28  0000 L CNN
+F 0 "C43" H 9100 3550 50  0000 L CNN
+F 1 "22u" H 9100 3650 50  0000 L CNN
 F 2 "Capacitor_SMD:C_1206_3216Metric" H 9000 3650 60  0001 C CNN
 F 3 "~" H 9000 3650 60  0001 C CNN
 F 4 "22u" H 9000 3650 60  0001 C CNN "Capacitance"
@@ -1486,7 +1514,7 @@ F 5 "Digikey" H 9100 3700 50  0001 C CNN "D1N"
 F 6 "1276-1101-1-ND" H 9100 3700 50  0001 C CNN "D1PN"
 F 7 "Samsung" H 9100 3700 50  0001 C CNN "MFN"
 F 8 "CL32A226KAJNNNE" H 9100 3700 50  0001 C CNN "MPN"
-F 9 "25V" H 9100 3700 28  0000 L CNN "Maximum Voltage"
+F 9 "25V" H 9100 3750 50  0000 L CNN "Maximum Voltage"
 F 10 "10%" H 9000 3650 60  0001 C CNN "Tolerance"
 	1    9000 3650
 	-1   0    0    1   
@@ -1495,8 +1523,8 @@ $Comp
 L Device:C_Small C44
 U 1 1 5D6A675B
 P 9300 3950
-F 0 "C44" H 9400 3900 28  0000 L CNN
-F 1 "4n7" H 9400 3950 28  0000 L CNN
+F 0 "C44" H 9400 3850 50  0000 L CNN
+F 1 "4n7" H 9400 3950 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 9300 3950 60  0001 C CNN
 F 3 "~" H 9300 3950 60  0001 C CNN
 F 4 "4n7" H 9300 3950 60  0001 C CNN "Capacitance"
@@ -1504,7 +1532,7 @@ F 5 "Digikey" H 9400 4000 50  0001 C CNN "D1N"
 F 6 "311-1039-1-ND" H 9400 4000 50  0001 C CNN "D1PN"
 F 7 "Yageo" H 9400 4000 50  0001 C CNN "MFN"
 F 8 "CC0402KRX7R8BB472" H 9400 4000 50  0001 C CNN "MPN"
-F 9 "25V" H 9400 4000 28  0000 L CNN "Maximum Voltage"
+F 9 "25V" H 9400 4050 50  0000 L CNN "Maximum Voltage"
 F 10 "10%" H 9300 3950 60  0001 C CNN "Tolerance"
 	1    9300 3950
 	-1   0    0    1   
@@ -1531,8 +1559,8 @@ $Comp
 L Device:C_Small C45
 U 1 1 5D6A6760
 P 10625 3800
-F 0 "C45" H 10725 3850 28  0000 L CNN
-F 1 "47u" H 10725 3800 28  0000 L CNN
+F 0 "C45" H 10350 3900 50  0000 L CNN
+F 1 "47u" H 10350 3800 50  0000 L CNN
 F 2 "Capacitor_SMD:C_1206_3216Metric" H 10625 3800 60  0001 C CNN
 F 3 "~" H 10625 3800 60  0001 C CNN
 F 4 "22u" H 10625 3800 60  0001 C CNN "Capacitance"
@@ -1540,7 +1568,7 @@ F 5 "Digikey" H 10725 3850 50  0001 C CNN "D1N"
 F 6 "1276-1101-1-ND" H 10725 3850 50  0001 C CNN "D1PN"
 F 7 "Samsung" H 10725 3850 50  0001 C CNN "MFN"
 F 8 "CL32A226KAJNNNE" H 10725 3850 50  0001 C CNN "MPN"
-F 9 "6.3V" H 10725 3750 28  0000 L CNN "Maximum Voltage"
+F 9 "6.3V" H 10350 3700 50  0000 L CNN "Maximum Voltage"
 F 10 "10%" H 10625 3800 60  0001 C CNN "Tolerance"
 	1    10625 3800
 	-1   0    0    -1  
