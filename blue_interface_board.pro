@@ -1,4 +1,4 @@
-update=Sat 22 Feb 2020 11:45:20 PM
+update=Tue Feb 25 12:53:15 2020
 last_client=kicad
 [general]
 version=1
@@ -243,4 +243,6 @@ dPairViaGap=0.25
 [ModEditFrame]
 version=1
 [SchematicFrame]
+version=1
+[LibeditFrame]
 version=1
