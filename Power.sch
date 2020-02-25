@@ -51,7 +51,6 @@ Connection ~ 3650 1100
 Connection ~ 4150 3600
 Connection ~ 4250 1100
 Connection ~ 4700 1100
-Connection ~ 4800 6400
 Connection ~ 4850 3600
 Connection ~ 5150 1100
 Connection ~ 5150 2600
@@ -61,10 +60,11 @@ Connection ~ 5200 3600
 Connection ~ 5450 1100
 Connection ~ 5450 1450
 Connection ~ 5550 2900
-Connection ~ 5650 7000
+Connection ~ 5800 5600
 Connection ~ 6100 1100
 Connection ~ 6100 1450
 Connection ~ 6550 1100
+Connection ~ 6550 6400
 Connection ~ 6650 3300
 Connection ~ 6925 1100
 Connection ~ 7050 3450
@@ -284,13 +284,13 @@ Wire Wire Line
 Wire Wire Line
 	4150 3650 4150 3600
 Wire Wire Line
-	4150 6700 4550 6700
-Wire Wire Line
-	4150 7000 4550 7000
-Wire Wire Line
 	4250 1100 4250 1900
 Wire Wire Line
 	4250 1100 4700 1100
+Wire Wire Line
+	4300 5300 4700 5300
+Wire Wire Line
+	4300 5600 4700 5600
 Wire Wire Line
 	4350 1550 4350 1900
 Wire Wire Line
@@ -299,8 +299,6 @@ Wire Wire Line
 	4700 900  4700 1100
 Wire Wire Line
 	4700 1100 5150 1100
-Wire Wire Line
-	4700 6400 4800 6400
 Wire Wire Line
 	4750 2300 5900 2300
 Wire Wire Line
@@ -346,19 +344,19 @@ Wire Wire Line
 Wire Wire Line
 	5200 3600 5550 3600
 Wire Wire Line
-	5200 6700 4750 6700
-Wire Wire Line
-	5200 7000 4750 7000
-Wire Wire Line
 	5250 3300 5200 3300
 Wire Wire Line
-	5300 5500 5650 5500
+	5350 5300 4900 5300
+Wire Wire Line
+	5350 5600 4900 5600
+Wire Wire Line
+	5400 6700 5400 6800
 Wire Wire Line
 	5450 1100 6100 1100
 Wire Wire Line
 	5450 1400 5450 1450
 Wire Wire Line
-	5500 6700 5650 6700
+	5500 6700 5400 6700
 Wire Wire Line
 	5550 2400 5550 2650
 Wire Wire Line
@@ -368,13 +366,11 @@ Wire Wire Line
 Wire Wire Line
 	5550 3500 5550 3600
 Wire Wire Line
-	5650 5700 5300 5700
+	5650 5300 5800 5300
 Wire Wire Line
-	5650 5800 5300 5800
+	5800 5300 5800 5600
 Wire Wire Line
-	5650 6700 5650 7000
-Wire Wire Line
-	5650 7000 5500 7000
+	5800 5600 5650 5600
 Wire Wire Line
 	5900 2650 5900 2300
 Wire Wire Line
@@ -391,6 +387,8 @@ Wire Wire Line
 	6100 1450 5450 1450
 Wire Wire Line
 	6100 1450 6550 1450
+Wire Wire Line
+	6450 6400 6550 6400
 Wire Wire Line
 	6550 1100 6550 1150
 Wire Wire Line
@@ -428,11 +426,17 @@ Wire Wire Line
 Wire Wire Line
 	7050 4250 7800 4250
 Wire Wire Line
+	7050 5500 7400 5500
+Wire Wire Line
 	7300 1400 7300 1100
 Wire Wire Line
 	7300 2600 7300 2700
 Wire Wire Line
 	7300 2700 7500 2700
+Wire Wire Line
+	7400 5700 7050 5700
+Wire Wire Line
+	7400 5800 7050 5800
 Wire Wire Line
 	7500 1100 7500 1400
 Wire Wire Line
@@ -575,6 +579,8 @@ Text Notes 1000 7600 0    50   ~ 0
 TODO: debugging UART pin for STDOUT
 Text Notes 1100 6300 2    50   ~ 0
 open-drain
+Text Notes 1150 6750 2    50   ~ 0
+USART2
 Text Notes 1650 3000 0    50   ~ 0
 TODO: gate TVS?
 Text Notes 2050 3800 0    50   ~ 0
@@ -589,12 +595,14 @@ Text Notes 3400 6400 2    50   ~ 0
 I2C1
 Text Notes 4000 5550 2    50   ~ 0
 COMP1 on PA0/PA1\nCOMP2 on PA3/PA2
+Text Notes 4850 6100 2    50   ~ 0
+printf()
 Text Notes 4970 3840 0    50   ~ 0
 18.9 V threshold Power Good
 Text Notes 5400 1000 0    50   ~ 0
 Schottky diode to eat\nkickback energy at power-off
 Text Notes 5500 4950 2    79   ~ 16
-ARM Cortex-M JTAG
+Misc MCU Debris
 Text Notes 5650 3100 2    50   ~ 0
 I2C addr: ZZZ = 0x40
 Text Notes 6450 2300 2    50   ~ 0
@@ -605,6 +613,8 @@ Text Notes 6850 1800 2    50   ~ 0
 SS floating = 4ms rise time
 Text Notes 6850 2200 2    50   ~ 0
 RT floating = 500 kHz
+Text Notes 7150 4950 2    79   ~ 16
+ARM Cortex-M SWD
 Text Notes 8200 4450 2    50   ~ 0
 20 uA / C27 = 0.133 V / ms ramp rate
 Text Notes 9000 4400 0    50   ~ 0
@@ -615,6 +625,12 @@ Text Label 1300 5900 2    50   ~ 0
 GATE_EN
 Text Label 1300 6300 2    50   ~ 0
 PGD
+Text Label 1300 6600 2    50   ~ 0
+GPIO0
+Text Label 1300 6700 2    50   ~ 0
+TX
+Text Label 1300 6800 2    50   ~ 0
+RX
 Text Label 1700 1100 2    50   ~ 0
 VIN
 Text Label 2300 5800 0    50   ~ 0
@@ -625,6 +641,8 @@ Text Label 2300 6300 0    50   ~ 0
 SCL
 Text Label 2300 6400 0    50   ~ 0
 SDA
+Text Label 2300 6500 0    50   ~ 0
+GPIO1
 Text Label 2650 6700 2    50   ~ 0
 SWDIO
 Text Label 2650 6800 2    50   ~ 0
@@ -637,24 +655,36 @@ Text Label 3550 3200 2    50   ~ 0
 SCL
 Text Label 3800 1400 0    50   ~ 0
 GATE
-Text Label 4150 6700 0    50   ~ 0
+Text Label 4300 5300 0    50   ~ 0
 LEDG
-Text Label 4150 7000 0    50   ~ 0
+Text Label 4300 5600 0    50   ~ 0
 LEDR
 Text Label 4400 1550 0    50   ~ 0
 LM_VDD
 Text Label 4800 2100 0    50   ~ 0
 PGD
+Text Label 4900 6800 2    50   ~ 0
+SCL
+Text Label 4900 6900 2    50   ~ 0
+GPIO1
 Text Label 5050 2500 2    50   ~ 0
 LM_VDD
-Text Label 5650 5500 2    50   ~ 0
-nRST
-Text Label 5650 5700 2    50   ~ 0
-SWDCLK
-Text Label 5650 5800 2    50   ~ 0
-SWDIO
+Text Label 5050 5950 2    50   ~ 0
+GPIO0
+Text Label 5050 6050 2    50   ~ 0
+TX
+Text Label 5050 6150 2    50   ~ 0
+RX
+Text Label 5400 6900 0    50   ~ 0
+SDA
 Text Label 6450 3300 0    50   ~ 0
 GATE
+Text Label 7400 5500 2    50   ~ 0
+nRST
+Text Label 7400 5700 2    50   ~ 0
+SWDCLK
+Text Label 7400 5800 2    50   ~ 0
+SWDIO
 Text Label 8000 5500 2    50   ~ 0
 GATE_EN
 Text GLabel 3200 5000 2    50   Input ~ 0
@@ -699,12 +729,12 @@ $EndComp
 $Comp
 L power:+3.3VP #PWR0153
 U 1 1 5D5EB6F2
-P 4800 5200
-F 0 "#PWR0153" H 4950 5150 50  0001 C CNN
-F 1 "+3.3VP" H 4820 5343 50  0000 C CNN
-F 2 "" H 4800 5200 50  0001 C CNN
-F 3 "" H 4800 5200 50  0001 C CNN
-	1    4800 5200
+P 6550 5200
+F 0 "#PWR0153" H 6700 5150 50  0001 C CNN
+F 1 "+3.3VP" H 6570 5343 50  0000 C CNN
+F 2 "" H 6550 5200 50  0001 C CNN
+F 3 "" H 6550 5200 50  0001 C CNN
+	1    6550 5200
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -840,14 +870,14 @@ F 3 "" H 4800 1750 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR0139
-U 1 1 5E51739C
-P 4800 6400
-F 0 "#PWR0139" H 4800 6150 50  0001 C CNN
-F 1 "GND" H 4805 6227 50  0001 C CNN
-F 2 "" H 4800 6400 50  0001 C CNN
-F 3 "" H 4800 6400 50  0001 C CNN
-	1    4800 6400
+L power:GND #PWR0152
+U 1 1 5E55447C
+P 5050 6250
+F 0 "#PWR0152" H 5050 6000 50  0001 C CNN
+F 1 "GND" H 5055 6077 50  0001 C CNN
+F 2 "" H 5050 6250 50  0001 C CNN
+F 3 "" H 5050 6250 50  0001 C CNN
+	1    5050 6250
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -873,14 +903,36 @@ F 3 "" H 5450 1450 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
+L power:GND #PWR0155
+U 1 1 5E562944
+P 5500 6700
+F 0 "#PWR0155" H 5500 6450 50  0001 C CNN
+F 1 "GND" H 5505 6527 50  0001 C CNN
+F 2 "" H 5500 6700 50  0001 C CNN
+F 3 "" H 5500 6700 50  0001 C CNN
+	1    5500 6700
+	-1   0    0    -1  
+$EndComp
+$Comp
 L power:GND #PWR0149
 U 1 1 5E590701
-P 5650 7000
-F 0 "#PWR0149" H 5650 6750 50  0001 C CNN
-F 1 "GND" H 5655 6827 50  0001 C CNN
-F 2 "" H 5650 7000 50  0001 C CNN
-F 3 "" H 5650 7000 50  0001 C CNN
-	1    5650 7000
+P 5800 5600
+F 0 "#PWR0149" H 5800 5350 50  0001 C CNN
+F 1 "GND" H 5805 5427 50  0001 C CNN
+F 2 "" H 5800 5600 50  0001 C CNN
+F 3 "" H 5800 5600 50  0001 C CNN
+	1    5800 5600
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0139
+U 1 1 5E51739C
+P 6550 6400
+F 0 "#PWR0139" H 6550 6150 50  0001 C CNN
+F 1 "GND" H 6555 6227 50  0001 C CNN
+F 2 "" H 6550 6400 50  0001 C CNN
+F 3 "" H 6550 6400 50  0001 C CNN
+	1    6550 6400
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -1132,23 +1184,23 @@ $EndComp
 $Comp
 L Device:R_Small R34
 U 1 1 5DD84AA4
-P 4650 6700
-F 0 "R34" V 4700 6800 50  0000 L CNN
-F 1 "470R" V 4700 6400 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" H 4650 6700 50  0001 C CNN
-F 3 "~" H 4650 6700 50  0001 C CNN
-	1    4650 6700
+P 4800 5300
+F 0 "R34" V 4850 5400 50  0000 L CNN
+F 1 "470R" V 4850 5000 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 4800 5300 50  0001 C CNN
+F 3 "~" H 4800 5300 50  0001 C CNN
+	1    4800 5300
 	0    -1   -1   0   
 $EndComp
 $Comp
 L Device:R_Small R18
 U 1 1 5E58F9CA
-P 4650 7000
-F 0 "R18" V 4700 7100 50  0000 L CNN
-F 1 "470R" V 4700 6700 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" H 4650 7000 50  0001 C CNN
-F 3 "~" H 4650 7000 50  0001 C CNN
-	1    4650 7000
+P 4800 5600
+F 0 "R18" V 4850 5700 50  0000 L CNN
+F 1 "470R" V 4850 5300 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 4800 5600 50  0001 C CNN
+F 3 "~" H 4800 5600 50  0001 C CNN
+	1    4800 5600
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -1611,23 +1663,23 @@ $EndComp
 $Comp
 L Device:LED D7
 U 1 1 5DD84AB5
-P 5350 6700
-F 0 "D7" H 5550 6650 50  0000 R CNN
-F 1 "GREEN" H 5500 6800 50  0000 R CNN
-F 2 "LED_SMD:LED_0603_1608Metric" H 5350 6700 50  0001 C CNN
-F 3 "~" H 5350 6700 50  0001 C CNN
-	1    5350 6700
+P 5500 5300
+F 0 "D7" H 5700 5250 50  0000 R CNN
+F 1 "GREEN" H 5650 5400 50  0000 R CNN
+F 2 "LED_SMD:LED_0603_1608Metric" H 5500 5300 50  0001 C CNN
+F 3 "~" H 5500 5300 50  0001 C CNN
+	1    5500 5300
 	-1   0    0    1   
 $EndComp
 $Comp
 L Device:LED D6
 U 1 1 5E58F9DF
-P 5350 7000
-F 0 "D6" H 5550 6950 50  0000 R CNN
-F 1 "RED" H 5500 7100 50  0000 R CNN
-F 2 "LED_SMD:LED_0603_1608Metric" H 5350 7000 50  0001 C CNN
-F 3 "~" H 5350 7000 50  0001 C CNN
-	1    5350 7000
+P 5500 5600
+F 0 "D6" H 5700 5550 50  0000 R CNN
+F 1 "RED" H 5650 5700 50  0000 R CNN
+F 2 "LED_SMD:LED_0603_1608Metric" H 5500 5600 50  0001 C CNN
+F 3 "~" H 5500 5600 50  0001 C CNN
+	1    5500 5600
 	-1   0    0    1   
 $EndComp
 $Comp
@@ -1666,6 +1718,28 @@ F 2 "BLDC:molex-0436500213" H 1350 1200 50  0001 C CNN
 F 3 "~" H 1350 1200 50  0001 C CNN
 	1    1350 1200
 	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J9
+U 1 1 5E553C28
+P 5250 6050
+F 0 "J9" H 5330 6042 50  0000 L CNN
+F 1 "DEBUG" H 5330 5951 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 5250 6050 50  0001 C CNN
+F 3 "~" H 5250 6050 50  0001 C CNN
+	1    5250 6050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x02_Odd_Even J10
+U 1 1 5E569A0C
+P 5100 6800
+F 0 "J10" H 5150 7016 50  0000 C CNN
+F 1 "I2C" H 5150 6925 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x02_P2.54mm_Vertical" H 5100 6800 50  0001 C CNN
+F 3 "~" H 5100 6800 50  0001 C CNN
+	1    5100 6800
+	1    0    0    -1  
 $EndComp
 $Comp
 L Device:Q_NPN_BEC Q3
@@ -1786,12 +1860,12 @@ $EndComp
 $Comp
 L Connector:Conn_ARM_JTAG_SWD_10 J5
 U 1 1 5D5E762E
-P 4800 5800
-F 0 "J5" H 4550 6400 50  0000 R CNN
-F 1 "Conn_ARM_JTAG_SWD_10" H 4357 5755 50  0001 R CNN
-F 2 "Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical" H 4800 5800 50  0001 C CNN
-F 3 "http://infocenter.arm.com/help/topic/com.arm.doc.ddi0314h/DDI0314H_coresight_components_trm.pdf" V 4450 4550 50  0001 C CNN
-	1    4800 5800
+P 6550 5800
+F 0 "J5" H 6300 6400 50  0000 R CNN
+F 1 "Conn_ARM_JTAG_SWD_10" H 6107 5755 50  0001 R CNN
+F 2 "Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical" H 6550 5800 50  0001 C CNN
+F 3 "http://infocenter.arm.com/help/topic/com.arm.doc.ddi0314h/DDI0314H_coresight_components_trm.pdf" V 6200 4550 50  0001 C CNN
+	1    6550 5800
 	1    0    0    -1  
 $EndComp
 $Comp
