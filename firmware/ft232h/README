@@ -1,0 +1,2 @@
+sudo rmmod ftdi_sio
+sudo ftdi_eeprom --flash-eeprom ft232h.conf 
