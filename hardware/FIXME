@@ -1,1 +1,3 @@
  * input TVS diode D4 is flipped on the silkscreen :facepalm:
+ * even though the ISL32458E has amazing common-mode capability, the termination analog-switch IC does not. Need to figure out another termination option (ideally software-selectable) that can handle common-mode transients.
+ * bias the RS485 lines to ensure +200 mV when nobody is transmitting. Simplest method seems to be to connect A to V_ISO and B to ISO_GND with ~486 ohm resistors.
