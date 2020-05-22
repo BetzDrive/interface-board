@@ -1,2 +1,3 @@
  * input TVS diode D4 is flipped on the silkscreen :facepalm:
  * bias the RS485 lines to ensure +200 mV when nobody is transmitting. Simplest method seems to be to connect A to V_ISO and B to ISO_GND with ~486 ohm resistors.
+ * add silkscreen labels for all pin headers
