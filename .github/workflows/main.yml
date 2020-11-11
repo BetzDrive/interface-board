@@ -12,8 +12,12 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  build-monitor-firmware:
+    # Set the path to the current monitor firmware.
+    defaults:
+      run:
+        working-directory: firmware/current_monitor
+        
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -26,7 +30,7 @@ jobs:
           release: '9-2019-q4' # The arm-none-eabi-gcc release to use
 
       # Runs a single command using the runners shell
-      - name: Build Check
-        working-directory: ./firmware/current_monitor
+      - name: Build Firmware
         run: |
+          git submodule update --init --recursive
           make
