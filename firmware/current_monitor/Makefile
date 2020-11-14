@@ -9,7 +9,7 @@ PROJECT ?= build/current_monitor
 # specify compiler flags
 CFLAGS  = -g -O2 -Wall
 CFLAGS += -TSTM32L071KZTx_FLASH.ld
-CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m4 -mthumb-interwork
+#CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m0+ -mthumb-interwork
 #CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 #CFLAGS += -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER
 CFLAGS += -Wl,--gc-sections
@@ -33,12 +33,12 @@ $(PROJECT).elf: $(SRCS)
 	$(OBJCOPY) -O ihex $(PROJECT).elf $(PROJECT).hex
 	$(OBJCOPY) -O binary $(PROJECT).elf $(PROJECT).bin
 
-upload: build/$(PROJECT).bin
+upload: $(PROJECT).bin
 	openocd -f openocd.cfg -c "\
 		init;\
 		reset halt;\
 		flash probe 0;\
-		flash write_image erase build/$(PROJECT).bin 0x08000000;\
-		verify_image build/$(PROJECT).bin 0x08000000;\
+		flash write_image erase $(PROJECT).bin 0x08000000;\
+		verify_image $(PROJECT).bin 0x08000000;\
 		reset run;\
 		shutdown"
