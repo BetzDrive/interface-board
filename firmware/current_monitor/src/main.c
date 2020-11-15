@@ -10,14 +10,14 @@
 #include "stm32l0xx_hal_gpio.h"
 #include "stm32l0xx_hal_rcc.h"
 
-/* Private variables ---------------------------------------------------------*/
-static GPIO_InitTypeDef  GPIO_InitStruct;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 
 
 int main(void) {
+  static GPIO_InitTypeDef GPIO_InitStruct;
+
   HAL_Init();
 
   SystemClock_Config();
@@ -30,7 +30,7 @@ int main(void) {
   GPIO_InitStruct.Pin = SHUNT_EN_PIN;
   HAL_GPIO_Init(SHUNT_EN_PORT, &GPIO_InitStruct);
 
-  while(1) {
+  while (1) {
     HAL_GPIO_WritePin(SHUNT_EN_PORT, SHUNT_EN_PIN, GPIO_PIN_SET);
     HAL_Delay(0x4000);
     HAL_GPIO_WritePin(SHUNT_EN_PORT, SHUNT_EN_PIN, GPIO_PIN_RESET);
@@ -89,5 +89,7 @@ void SystemClock_Config(void)
      clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
-  
+
+  /* Disable Power Control clock */
+  __HAL_RCC_PWR_CLK_DISABLE();
 }

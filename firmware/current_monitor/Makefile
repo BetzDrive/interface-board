@@ -39,17 +39,21 @@ INC_DIRS += $(DEVICE_PATH)
 
 PROJECT ?= build/current_monitor
 
-DEFS += -DSTM32L07X_MD -DUSE_STDPERIPH_DRIVER
+DEFS += -DSTM32L071xx -DUSE_STDPERIPH_DRIVER
 
 # directories to be searched for header files
 INCLUDE = $(addprefix -I,$(INC_DIRS))
 
+# Debug flags
+DFLAGS = -g2 -ggdb
+
 # specify compiler flags
-CFLAGS  = -ggdb -O0 -Wall --specs=nosys.specs
-CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m0 -mthumb-interwork
+CFLAGS  = -std=gnu99 -N -O0 -Wall --specs=nosys.specs
+CFLAGS += -ffunction-sections -fdata-sections
+CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m0plus -mthumb-interwork
 CFLAGS += -Wl,--gc-sections
 
-LFGLAGS = -TSTM32L071KZTx_FLASH.ld
+LFGLAGS = -Tflash.ld
 
 CC = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
@@ -61,7 +65,7 @@ clean:
 
 $(PROJECT).elf: $(SRCS)
 	mkdir -p build
-	$(CC) $(INCLUDE) $(DEFS) $(CFLAGS) $(LFLAGS) $^ -o $@
+	$(CC) $(INCLUDE) $(DEFS) $(DFLAGS) $(CFLAGS) $(LFLAGS) $^ -o $@
 	$(OBJCOPY) -O ihex $(PROJECT).elf $(PROJECT).hex
 	$(OBJCOPY) -O binary $(PROJECT).elf $(PROJECT).bin
 
@@ -70,14 +74,16 @@ upload: $(PROJECT).bin
 		init;\
 		reset halt;\
 		flash probe 0;\
-		flash write_image erase $^ 0x8000000;\
-		verify_image $^ 0x8000000;\
+		flash write_image erase $^ 0x08000000;\
+		verify_image $^ 0x08000000;\
 		reset run;\
 		shutdown"
 
 # Flash the STM32F4
 flash: 
-	st-flash --debug write $(PROJ_NAME).bin 0x8000000
+	st-flash --debug write $(PROJ_NAME).bin 0x08000000
 
 debug: $(PROJECT).elf
-	./run_gdb.sh
+	gdb-multiarch --eval-command="target extended-remote localhost:3333" \
+		build/current_monitor.elf
+	#./run_gdb.sh
