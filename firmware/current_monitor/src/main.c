@@ -27,13 +27,13 @@ int main(void) {
   GPIO_InitStruct.Pull  = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
 
-  GPIO_InitStruct.Pin = SHUNT_EN_PIN;
-  HAL_GPIO_Init(SHUNT_EN_PORT, &GPIO_InitStruct);
+  GPIO_InitStruct.Pin = GREEN_LED_PIN;
+  HAL_GPIO_Init(GREEN_LED_PORT, &GPIO_InitStruct);
 
   while (1) {
-    HAL_GPIO_WritePin(SHUNT_EN_PORT, SHUNT_EN_PIN, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GREEN_LED_PORT, GREEN_LED_PIN, GPIO_PIN_SET);
     HAL_Delay(0x4000);
-    HAL_GPIO_WritePin(SHUNT_EN_PORT, SHUNT_EN_PIN, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GREEN_LED_PORT, GREEN_LED_PIN, GPIO_PIN_RESET);
     HAL_Delay(0x4000);
   }
 
