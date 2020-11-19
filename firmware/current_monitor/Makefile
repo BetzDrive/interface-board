@@ -53,10 +53,11 @@ CFLAGS += -ffunction-sections -fdata-sections
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m0plus -mthumb-interwork
 CFLAGS += -Wl,--gc-sections
 
-LFGLAGS = -Tflash.ld
+LFLAGS = -Wl,-Map=$(PROJECT).map,--cref -T flash.ld
 
 CC = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
+OBJDUMP = arm-none-eabi-objdump
 
 all: $(PROJECT).elf
 
@@ -68,6 +69,7 @@ $(PROJECT).elf: $(SRCS)
 	$(CC) $(INCLUDE) $(DEFS) $(DFLAGS) $(CFLAGS) $(LFLAGS) $^ -o $@
 	$(OBJCOPY) -O ihex $(PROJECT).elf $(PROJECT).hex
 	$(OBJCOPY) -O binary $(PROJECT).elf $(PROJECT).bin
+	$(OBJDUMP) -S -d $(PROJECT).elf > $(PROJECT).objdump
 
 upload: $(PROJECT).bin
 	openocd -f openocd.cfg -c "\
