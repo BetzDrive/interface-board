@@ -79,6 +79,21 @@ upload: $(PROJECT).bin
 		reset run;\
 		shutdown"
 
+flash_olimex: $(PROJECT).bin
+	openocd -f interface/ftdi/olimex-arm-usb-tiny-h.cfg -f interface/ftdi/olimex-arm-jtag-swd.cfg -f target/stm32l0.cfg -c "\
+		reset_config srst_only srst_nogate connect_assert_srst; \
+		init; \
+		sleep 100; \
+		reset halt; \
+		sleep 100; \
+		flash probe 0; \
+		flash write_image erase $^ 0x08000000;\
+		verify_image $^ 0x08000000;\
+		sleep 100; \
+		reset run; \
+		sleep 100; \
+		shutdown"
+
 # Flash the STM32F4
 flash: 
 	st-flash --debug write $(PROJ_NAME).bin 0x08000000
