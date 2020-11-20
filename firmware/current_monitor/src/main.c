@@ -9,30 +9,31 @@
 #include "stm32l0xx_hal.h"
 #include "stm32l0xx_hal_gpio.h"
 #include "stm32l0xx_hal_rcc.h"
+#include "stm32l0xx_hal_tim.h"
 
 
 /* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
+static void SystemClock_Config(void);
+static void GPIO_Config(void);
+static void TIM_Config(void);
+
+static GPIO_InitTypeDef GPIO_InitStruct;
+static GPIO_InitTypeDef SHUNT_PIN_InitStruct;
+static TIM_HandleTypeDef TIM_InitStruct;
+static TIM_OC_InitTypeDef sConfig;
 
 
 int main(void) {
-  static GPIO_InitTypeDef GPIO_InitStruct;
-
   HAL_Init();
 
   // Initialize the system clock.
   SystemClock_Config();
 
-  // Enable the GPIO Clock.
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-
   // Configure the GPIO pins.
-  GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull  = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_Config();
 
-  GPIO_InitStruct.Pin = GREEN_LED_PIN | RED_LED_PIN;
-  HAL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
+  // Configure Timers.
+  TIM_Config();
 
   while (1) {
     HAL_GPIO_TogglePin(LED_PORT, GREEN_LED_PIN);
@@ -41,6 +42,60 @@ int main(void) {
   }
 
   return 1;
+}
+
+void GPIO_Config() {
+
+  // Enable the GPIO Clock.
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+
+  GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull  = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Pin = GREEN_LED_PIN | RED_LED_PIN;
+  HAL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
+
+  // Configure the PWM Pin.
+  SHUNT_PIN_InitStruct.Mode = GPIO_MODE_AF_PP;
+  SHUNT_PIN_InitStruct.Pull = GPIO_NOPULL;
+  SHUNT_PIN_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  SHUNT_PIN_InitStruct.Pin = SHUNT_EN_PIN;
+  SHUNT_PIN_InitStruct.Alternate = GPIO_AF5_TIM2;
+  HAL_GPIO_Init(SHUNT_EN_PORT, &SHUNT_PIN_InitStruct);
+}
+
+/**
+ * Configuring TIM2 Channel 1 to run PWM at 1kHz.
+ **/
+void TIM_Config() {
+
+  uint32_t uhPrescalerValue = (uint32_t)(SystemCoreClock / 1000) - 1;
+
+  TIM_InitStruct.Instance = TIM2;
+
+  TIM_InitStruct.Init.Prescaler = uhPrescalerValue;
+  TIM_InitStruct.Init.CounterMode = TIM_COUNTERMODE_UP;
+  TIM_InitStruct.Init.Period = 500U;
+  TIM_InitStruct.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+
+  TIM_InitStruct.Channel = TIM_CHANNEL_1;
+
+  if (HAL_TIM_PWM_Init(&TIM_InitStruct) != HAL_OK) {
+    while(1);
+  }
+
+  sConfig.OCMode       = TIM_OCMODE_PWM1;
+  sConfig.OCPolarity   = TIM_OCPOLARITY_HIGH;
+  sConfig.OCFastMode   = TIM_OCFAST_DISABLE;
+
+  /* Set the pulse value for channel 1 */
+  sConfig.Pulse = 500;
+  if (HAL_TIM_PWM_ConfigChannel(&TIM_InitStruct, &sConfig, TIM_CHANNEL_1) != HAL_OK) {
+    while(1);
+  }
+  if (HAL_TIM_PWM_Start(&TIM_InitStruct, TIM_CHANNEL_1) != HAL_OK) {
+    while(1);
+  }
 }
 
 /**
