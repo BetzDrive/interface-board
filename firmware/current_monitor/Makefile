@@ -16,6 +16,9 @@ SRCS = src/main.c
 # was writen by ST.
 SRCS += src/system_stm32l0xx.c
 
+# This contains the sys tick handler that resets the watchdog.
+SRCS += src/stm32l0xx_it.c
+
 # Found using STM_SRC
 SRCS += stm32l0xx_hal.c
 SRCS += stm32l0xx_hal_cortex.c

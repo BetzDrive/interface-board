@@ -17,7 +17,6 @@ void SystemClock_Config(void);
 
 int main(void) {
   static GPIO_InitTypeDef GPIO_InitStruct;
-  static WWDG_HangleTypeDef WWDG_InitStruct;
 
   HAL_Init();
 
