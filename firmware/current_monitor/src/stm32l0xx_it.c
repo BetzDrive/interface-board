@@ -16,6 +16,8 @@
 #endif
 #include "stm32l0xx_it.h"
 
+#include "peripherals.h"
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -39,4 +41,20 @@ void SysTick_Handler(void)
 #ifdef USE_RTOS_SYSTICK
   osSystickHandler();
 #endif
+}
+
+/******************************************************************************/
+/*                 STM32L0xx Peripherals Interrupt Handlers                   */
+/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
+/*  available peripheral interrupt handler's name please refer to the startup */
+/*  file (startup_stm32l0xx.s).                                               */
+/******************************************************************************/
+/**
+  * @brief  This function handles ADC interrupt request.
+  * @param  None
+  * @retval None
+  */
+void ADC1_COMP_IRQHandler(void)
+{
+  HAL_ADC_IRQHandler(&AdcHandle);
 }

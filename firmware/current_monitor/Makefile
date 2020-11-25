@@ -11,6 +11,10 @@ vpath %.c $(STM_SRC)
 # Source file
 SRCS = src/main.c
 
+# Local Sources:
+SRCS += src/peripherals.c
+SRCS += src/io_utils.c
+
 # Contains initialisation code and must be compiled into
 # our project. This file is in the current directory and
 # was writen by ST.
@@ -21,6 +25,7 @@ SRCS += src/stm32l0xx_it.c
 
 # Found using STM_SRC
 SRCS += stm32l0xx_hal.c
+SRCS += stm32l0xx_hal_adc.c
 SRCS += stm32l0xx_hal_cortex.c
 SRCS += stm32l0xx_hal_crc.c
 SRCS += stm32l0xx_hal_flash.c
@@ -54,9 +59,8 @@ DFLAGS = -g2 -ggdb
 CFLAGS  = -std=gnu99 -N -O0 -Wall --specs=nosys.specs
 CFLAGS += -ffunction-sections -fdata-sections
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m0plus -mthumb-interwork
-CFLAGS += -Wl,--gc-sections
 
-LFLAGS = -Wl,-Map=$(PROJECT).map,--cref -T flash.ld
+LFLAGS = -Wl,-Map=$(PROJECT).map,--cref,--gc-sections -T flash.ld
 
 CC = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
