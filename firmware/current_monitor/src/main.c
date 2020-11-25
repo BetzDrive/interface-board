@@ -33,11 +33,12 @@ int main(void) {
   GPIO_Config();
 
   // Configure Timers.
-  TIM_Config();
+  //TIM_Config();
 
   while (1) {
     HAL_GPIO_TogglePin(LED_PORT, GREEN_LED_PIN);
-    HAL_Delay(1000);
+    HAL_GPIO_TogglePin(SHUNT_EN_PORT, SHUNT_EN_PIN);
+    HAL_Delay(100);
     HAL_GPIO_TogglePin(LED_PORT, RED_LED_PIN);
   }
 
@@ -48,35 +49,48 @@ void GPIO_Config() {
 
   // Enable the GPIO Clock.
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
 
   GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull  = GPIO_PULLUP;
+  GPIO_InitStruct.Pull  = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Pin = GREEN_LED_PIN | RED_LED_PIN;
+  GPIO_InitStruct.Pin = GREEN_LED_PIN | RED_LED_PIN | SHUNT_EN_PIN;
   HAL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
 
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pin  = GPIO_PIN_15;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
   // Configure the PWM Pin.
+  /*
   SHUNT_PIN_InitStruct.Mode = GPIO_MODE_AF_PP;
   SHUNT_PIN_InitStruct.Pull = GPIO_NOPULL;
   SHUNT_PIN_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   SHUNT_PIN_InitStruct.Pin = SHUNT_EN_PIN;
   SHUNT_PIN_InitStruct.Alternate = GPIO_AF5_TIM2;
   HAL_GPIO_Init(SHUNT_EN_PORT, &SHUNT_PIN_InitStruct);
+  */
 }
 
 /**
  * Configuring TIM2 Channel 1 to run PWM at 1kHz.
  **/
 void TIM_Config() {
-
-  uint32_t uhPrescalerValue = (uint32_t)(SystemCoreClock / 1000) - 1;
+  __HAL_RCC_TIM2_CLK_ENABLE();
 
   TIM_InitStruct.Instance = TIM2;
 
-  TIM_InitStruct.Init.Prescaler = uhPrescalerValue;
+  uint32_t period = (uint32_t)(SystemCoreClock / 1000) - 1;
+  /* Clock prescaler is 1. Count on every clock tick. */
+  TIM_InitStruct.Init.Prescaler = 1;
   TIM_InitStruct.Init.CounterMode = TIM_COUNTERMODE_UP;
-  TIM_InitStruct.Init.Period = 500U;
+  /* Reset whenever the count reaches the value that equates to the desired
+   * frequency as a fraction of the clock frequency. */
+  TIM_InitStruct.Init.Period = period;
+  /* Don't divide the clock. */
   TIM_InitStruct.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  /* Reset the counter to 0. */
+  TIM_InitStruct.Init.AutoReloadPreload = 0;
 
   TIM_InitStruct.Channel = TIM_CHANNEL_1;
 
@@ -88,8 +102,8 @@ void TIM_Config() {
   sConfig.OCPolarity   = TIM_OCPOLARITY_HIGH;
   sConfig.OCFastMode   = TIM_OCFAST_DISABLE;
 
-  /* Set the pulse value for channel 1 */
-  sConfig.Pulse = 500;
+  /* Set the pulse value for channel 1 to 50% duty cycle */
+  sConfig.Pulse = period * 0.5;
   if (HAL_TIM_PWM_ConfigChannel(&TIM_InitStruct, &sConfig, TIM_CHANNEL_1) != HAL_OK) {
     while(1);
   }
