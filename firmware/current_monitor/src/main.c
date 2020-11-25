@@ -33,11 +33,10 @@ int main(void) {
   GPIO_Config();
 
   // Configure Timers.
-  //TIM_Config();
+  TIM_Config();
 
   while (1) {
     HAL_GPIO_TogglePin(LED_PORT, GREEN_LED_PIN);
-    HAL_GPIO_TogglePin(SHUNT_EN_PORT, SHUNT_EN_PIN);
     HAL_Delay(100);
     HAL_GPIO_TogglePin(LED_PORT, RED_LED_PIN);
   }
@@ -54,7 +53,7 @@ void GPIO_Config() {
   GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull  = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Pin = GREEN_LED_PIN | RED_LED_PIN | SHUNT_EN_PIN;
+  GPIO_InitStruct.Pin = GREEN_LED_PIN | RED_LED_PIN;
   HAL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
 
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -62,14 +61,12 @@ void GPIO_Config() {
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   // Configure the PWM Pin.
-  /*
   SHUNT_PIN_InitStruct.Mode = GPIO_MODE_AF_PP;
   SHUNT_PIN_InitStruct.Pull = GPIO_NOPULL;
   SHUNT_PIN_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   SHUNT_PIN_InitStruct.Pin = SHUNT_EN_PIN;
   SHUNT_PIN_InitStruct.Alternate = GPIO_AF5_TIM2;
   HAL_GPIO_Init(SHUNT_EN_PORT, &SHUNT_PIN_InitStruct);
-  */
 }
 
 /**
@@ -103,7 +100,7 @@ void TIM_Config() {
   sConfig.OCFastMode   = TIM_OCFAST_DISABLE;
 
   /* Set the pulse value for channel 1 to 50% duty cycle */
-  sConfig.Pulse = period * 0.5;
+  sConfig.Pulse = period * 0.25;
   if (HAL_TIM_PWM_ConfigChannel(&TIM_InitStruct, &sConfig, TIM_CHANNEL_1) != HAL_OK) {
     while(1);
   }
