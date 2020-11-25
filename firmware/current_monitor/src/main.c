@@ -79,7 +79,7 @@ void TIM_Config() {
 
   uint32_t period = (uint32_t)(SystemCoreClock / 1000) - 1;
   /* Clock prescaler is 1. Count on every clock tick. */
-  TIM_InitStruct.Init.Prescaler = 1;
+  TIM_InitStruct.Init.Prescaler = 0;
   TIM_InitStruct.Init.CounterMode = TIM_COUNTERMODE_UP;
   /* Reset whenever the count reaches the value that equates to the desired
    * frequency as a fraction of the clock frequency. */
