@@ -3,7 +3,6 @@
 
 #include "stm32l0xx_hal.h"
 #include "stm32l0xx_hal_adc.h"
-#include "stm32l0xx_hal_dma.h"
 #include "stm32l0xx_hal_gpio.h"
 #include "stm32l0xx_hal_rcc.h"
 #include "stm32l0xx_hal_tim.h"

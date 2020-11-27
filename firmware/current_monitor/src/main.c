@@ -28,6 +28,7 @@ int main(void) {
 
     duty_cycle = read_voltage() * 0.01;
     TIM2->CCR1 = (uint32_t)(pulse_period * duty_cycle);
+    ADC1->CR |= 1 << 2;
   }
 
   return 1;

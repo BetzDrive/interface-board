@@ -10,5 +10,6 @@
  */
 float read_voltage(void) {
   static float voltage = source_volt_per_count;
+  AdcReading = ADC1->DR;
   return voltage * AdcReading;
 }

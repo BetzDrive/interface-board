@@ -6,17 +6,14 @@ static void SystemClock_Config(void);
 static void GPIO_Config(void);
 static void TIM_Config(void);
 static void ADC_Config(void);
-static void DMA_Config(void);
 
 uint32_t AdcReading = 0;
 
 GPIO_InitTypeDef GPIO_InitStruct = {0};
-GPIO_InitTypeDef SHUNT_PIN_InitStruct = {0};
 TIM_HandleTypeDef TIM_InitStruct = {0};
 TIM_OC_InitTypeDef TIM_OC_InitStruct = {0};
 ADC_HandleTypeDef AdcHandle = {0};
 ADC_ChannelConfTypeDef AdcConf = {0};
-DMA_HandleTypeDef DmaHandle = {0};
 
 void Error_Handler(void) {
   while(1);
@@ -27,8 +24,6 @@ void Peripherals_Init() {
   // Initialize the system clock.
   SystemClock_Config();
 
-  /* Enable DMA1 clock */
-  __HAL_RCC_DMA1_CLK_ENABLE();
   /* ADC1 Periph clock enable */
   __HAL_RCC_ADC1_CLK_ENABLE();
   /* Enable the GPIO clocks. */
@@ -81,11 +76,11 @@ void ADC_Config() {
   AdcHandle.Init.SamplingTime          = ADC_SAMPLETIME_7CYCLES_5;
   AdcHandle.Init.ScanConvMode          = ADC_SCAN_DIRECTION_FORWARD;
   AdcHandle.Init.DataAlign             = ADC_DATAALIGN_RIGHT;
-  AdcHandle.Init.ContinuousConvMode    = ENABLE;
-  AdcHandle.Init.DiscontinuousConvMode = DISABLE;
+  AdcHandle.Init.ContinuousConvMode    = DISABLE;
+  AdcHandle.Init.DiscontinuousConvMode = ENABLE;
   AdcHandle.Init.ExternalTrigConvEdge  = ADC_EXTERNALTRIGCONVEDGE_NONE;
   AdcHandle.Init.EOCSelection          = ADC_EOC_SINGLE_CONV;
-  AdcHandle.Init.DMAContinuousRequests = ENABLE;
+  AdcHandle.Init.DMAContinuousRequests = DISABLE;
  
   /* Initialize ADC peripheral according to the passed parameters */
   if (HAL_ADC_Init(&AdcHandle) != HAL_OK)
@@ -101,38 +96,11 @@ void ADC_Config() {
     Error_Handler();
   }
 
-  DMA_Config();
-
   /* ### - 4 - Start conversion in DMA mode ########################## */
   if (HAL_ADC_Start_DMA(&AdcHandle, &AdcReading, 2) != HAL_OK)
   {
     Error_Handler();
   }
-}
-
-void DMA_Config() {
-
-  /*********************** Configure DMA parameters **************************/
-  DmaHandle.Instance                 = DMA1_Channel1;
-  DmaHandle.Init.Direction           = DMA_PERIPH_TO_MEMORY;
-  DmaHandle.Init.PeriphInc           = DMA_PINC_DISABLE;
-  DmaHandle.Init.MemInc              = DMA_MINC_ENABLE;
-  DmaHandle.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
-  DmaHandle.Init.MemDataAlignment    = DMA_MDATAALIGN_WORD;
-  DmaHandle.Init.Mode                = DMA_CIRCULAR;
-  DmaHandle.Init.Priority            = DMA_PRIORITY_MEDIUM;
-  DmaHandle.Init.Request             = DMA_REQUEST_0;
-
-  /* Deinitialize  & Initialize the DMA for new transfer */
-  HAL_DMA_DeInit(&DmaHandle);
-  HAL_DMA_Init(&DmaHandle);
-
-  /* Associate the DMA handle */
-  __HAL_LINKDMA(&AdcHandle, DMA_Handle, DmaHandle);
-
-  /* NVIC configuration for DMA Input data interrupt */
-  HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 1, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
 }
 
 void GPIO_Config() {
@@ -153,12 +121,12 @@ void GPIO_Config() {
   HAL_GPIO_Init(VOLTAGE_READ_PORT, &GPIO_InitStruct);
 
   // Configure the PWM Pin.
-  SHUNT_PIN_InitStruct.Mode = GPIO_MODE_AF_PP;
-  SHUNT_PIN_InitStruct.Pull = GPIO_NOPULL;
-  SHUNT_PIN_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  SHUNT_PIN_InitStruct.Pin = SHUNT_EN_PIN;
-  SHUNT_PIN_InitStruct.Alternate = GPIO_AF5_TIM2;
-  HAL_GPIO_Init(SHUNT_EN_PORT, &SHUNT_PIN_InitStruct);
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Pin = SHUNT_EN_PIN;
+  GPIO_InitStruct.Alternate = GPIO_AF5_TIM2;
+  HAL_GPIO_Init(SHUNT_EN_PORT, &GPIO_InitStruct);
 }
 
 /**
