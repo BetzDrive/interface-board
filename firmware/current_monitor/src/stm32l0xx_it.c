@@ -37,10 +37,6 @@
 void SysTick_Handler(void)
 {
   HAL_IncTick();
-  HAL_SYSTICK_IRQHandler();
-#ifdef USE_RTOS_SYSTICK
-  osSystickHandler();
-#endif
 }
 
 /******************************************************************************/
@@ -50,11 +46,11 @@ void SysTick_Handler(void)
 /*  file (startup_stm32l0xx.s).                                               */
 /******************************************************************************/
 /**
-  * @brief  This function handles ADC interrupt request.
-  * @param  None
-  * @retval None
-  */
-void ADC1_COMP_IRQHandler(void)
+* @brief  This function handles DMA1 Channel1 interrupt request.
+* @param  None
+* @retval None
+*/
+void DMA1_Channel1_IRQHandler(void)
 {
-  HAL_ADC_IRQHandler(&AdcHandle);
+  HAL_DMA_IRQHandler(AdcHandle.DMA_Handle);
 }

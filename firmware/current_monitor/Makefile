@@ -26,6 +26,7 @@ SRCS += src/stm32l0xx_it.c
 # Found using STM_SRC
 SRCS += stm32l0xx_hal.c
 SRCS += stm32l0xx_hal_adc.c
+SRCS += stm32l0xx_hal_dma.c
 SRCS += stm32l0xx_hal_cortex.c
 SRCS += stm32l0xx_hal_crc.c
 SRCS += stm32l0xx_hal_flash.c

@@ -1,12 +1,14 @@
 #ifndef __IO_UTILS_H__
 #define __IO_UTILS_H__
 
+#include <stdint.h>
+
 #define VOLTAGE_DIVIDER(HIGH, LOW) (LOW / (LOW + HIGH))
 
 /* The voltage divider composition as found on the schematic. */
 const static float div_multiplier = VOLTAGE_DIVIDER(140000.0f, 6340.0f);
 /* The ADC range (12 bit). */
-const static float adc_values = 1 << 12;
+const static uint32_t adc_values = (1 << 12) - 1;
 /* The ADC reference voltage. */
 const static float adc_reference_voltage = 3.3f;
 /* The voltage a single count on the ADC represents. */

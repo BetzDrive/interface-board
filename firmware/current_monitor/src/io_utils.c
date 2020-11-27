@@ -9,5 +9,6 @@
  * FPU on this chipset.
  */
 float read_voltage(void) {
-  return source_volt_per_count * AdcReading;
+  static float voltage = source_volt_per_count;
+  return voltage * AdcReading;
 }
