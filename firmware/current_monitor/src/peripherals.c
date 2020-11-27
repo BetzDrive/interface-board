@@ -42,9 +42,7 @@ void Peripherals_Init() {
 
 void ADC_Config() {
 
-  /* ## - 1 - Enable peripherals Clock ######################################*/
-
-  /* ## - 2 - Initialize ADC peripheral #################################### */
+  /* ## - 1 - Initialize ADC peripheral #################################### */
   /*
    *  Instance                  = ADC1.
    *  OversamplingMode          = Disabled
@@ -88,7 +86,7 @@ void ADC_Config() {
     Error_Handler();
   }
 
-  /* ### - 3 - Channel configuration ####################################### */
+  /* ### - 2 - Channel configuration ####################################### */
   /* Select Channel 1 to be converted */
   AdcConf.Channel = ADC_CHANNEL_1;    
   if (HAL_ADC_ConfigChannel(&AdcHandle, &AdcConf) != HAL_OK)
@@ -96,8 +94,7 @@ void ADC_Config() {
     Error_Handler();
   }
 
-  /* ### - 4 - Start conversion in DMA mode ########################## */
-  if (HAL_ADC_Start_DMA(&AdcHandle, &AdcReading, 2) != HAL_OK)
+  if (HAL_ADC_Start(&AdcHandle) != HAL_OK)
   {
     Error_Handler();
   }
