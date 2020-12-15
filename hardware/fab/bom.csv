@@ -57,7 +57,7 @@ Component,Quantity Per PCB,References,Value,Footprint,MFN,MPN,D1N,D1PN,Maximum V
 56,1,R28,6.34k,R_0603_1608Metric,Panasonic,ERA-3AEB6341V,Digikey,P6.34KDBCT-ND,,0.1%
 57,1,R25,6.65k,R_0603_1608Metric,Panasonic,ERA-3AEB6651V,Digikey,P6.65KDBCT-ND,,0.1%
 58,1,R11,6k49,R_0603_1608Metric,Panasonic,ERA-3AEB6491V,Digikey,P6.49KDBCT-ND,,0.1%
-59,1,R29,91k,R_0603_1608Metric,Yageo,RC0402FR-0791KL,Digikey,311-91.0KLRCT-ND,,1%
+59,1,R29,91k,R_0603_1608Metric,Yageo,RC0603FR-0791KL,Digikey,311-91.0KHRDKR-ND,,1%
 60,1,U1,93LCxxB,SOIC-8_3.9x4.9mm_P1.27mm,Microchip,93LC56B/SN,Digikey,93LC56B/SN-ND,,
 61,1,U3,ADM2682E,SOIC-16W_7.5x12.8mm_P1.27mm,Analog Devices,ADM2682EBRIZ,Digikey,ADM2682EBRIZ-ND,,
 62,1,U9,FAN3111E,SOT-23-5,ON Semi,FAN3111ESX,Digikey,FAN3111ESXCT-ND,,
@@ -81,6 +81,6 @@ Total components:,126
 Schematic Version:,
 Schematic Date:,
 PCB Variant:,['default']
-BoM Date:,Wed 02 Dec 2020 09:00:02 AM PST
+BoM Date:,Mon 14 Dec 2020 11:55:06 PM PST
 Schematic Source:,blue_interface_board.kicad_sch
 KiCad Version:,Eeschema 5.99.0-unknown-dd374e12a~102~ubuntu20.04.1
